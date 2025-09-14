@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Epic Games Launcher</title>
+  <title>Launching...</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
@@ -103,12 +103,23 @@
     }
 
     window.addEventListener('load', function(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const gameSlug = urlParams.get('game');
+      const locale = urlParams.get('locale') || 'en-US';
+
+      // Try to open launcher
       setTimeout(tryLaunch, 250);
 
       // After 8 seconds, swap loading bar with fallback text
       setTimeout(function(){
         document.querySelector('.loading-bar').style.opacity = '0';
-        document.querySelector('.fallback').style.opacity = '1';
+        const fallback = document.querySelector('.fallback');
+        if (gameSlug) {
+          fallback.innerHTML = `Didn't launch? <a href="https://store.epicgames.com/${locale}/p/${gameSlug}">Click to open in store</a>`;
+        } else {
+          fallback.innerHTML = `Didn't launch? <a href="https://store.epicgames.com/${locale}/">Click to open Epic Store</a>`;
+        }
+        fallback.style.opacity = '1';
       }, 8000);
     });
   </script>
@@ -120,9 +131,7 @@
     <div class="loading-bar">
       <div class="loading-fill"></div>
     </div>
-    <div class="fallback">
-      Didn't launch? <a href="com.epicgames.launcher://">Click to launch</a>
-    </div>
+    <div class="fallback"></div>
   </div>
 </body>
 </html>
