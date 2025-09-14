@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Launching...</title>
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="epic-favicon.png">
+  <meta charset="utf-8">
+  <title>Epic Games Launcher</title>
+
+  <!-- Use the uploaded favicon.png in the repo root -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
+    html,body{
+      height:100%;
+      margin:0;
+    }
     body {
       margin: 0;
       height: 100vh;
@@ -14,18 +22,21 @@
       justify-content: center;
       align-items: center;
       background-color: #121212; /* dark background */
-      color: #fff; /* white text */
+      color: #fff;
       font-family: Arial, sans-serif;
     }
+
     .logo {
       width: 120px;
       margin-bottom: 30px;
-      filter: invert(1); /* invert SVG to white */
+      filter: invert(1); /* invert black SVG to white */
+      -webkit-filter: invert(1);
     }
+
     .loading-bar {
       width: 200px;
       height: 6px;
-      background: #333; /* dark gray bar background */
+      background: #333;
       border-radius: 3px;
       overflow: hidden;
       position: relative;
@@ -33,7 +44,7 @@
     .loading-fill {
       height: 100%;
       width: 0%;
-      background: #fff; /* white loading animation */
+      background: #fff;
       border-radius: 3px;
       animation: load 2s infinite;
     }
@@ -42,31 +53,62 @@
       50% { width: 100%; left: 0; }
       100% { width: 0%; left: 100%; }
     }
-    a {
-      margin-top: 15px;
-      color: #aaa;
-      text-decoration: none; /* no underline */
-      font-size: 14px;
-      display: block;
-      text-align: center;
+
+    .links {
+      margin-top: 16px;
+      text-align:center;
+      line-height:1.6;
     }
-    a:hover {
-      color: #fff; /* brighten on hover */
+    .links a {
+      color: #aaa;
+      text-decoration: none; /* remove underline */
+      font-size: 14px;
+      display:block;
+    }
+    .links a:hover {
+      color: #fff;
+      text-decoration: none; /* never underline */
+    }
+
+    /* small responsive tweak */
+    @media (max-width:420px){
+      .logo{ width:96px; margin-bottom:20px; }
+      .loading-bar{ width:160px; }
     }
   </style>
+
   <script>
-    window.onload = function() {
-      // Try to launch Epic Games Launcher
+    // Attempt to open the launcher immediately
+    function tryLaunch() {
+      // navigate to the custom protocol
       window.location.href = "com.epicgames.launcher://";
-    };
+      // also attempt opening via iframe (older fallbacks, may be blocked by some browsers)
+      try {
+        var ifr = document.createElement('iframe');
+        ifr.style.display = 'none';
+        ifr.src = "com.epicgames.launcher://";
+        document.body.appendChild(ifr);
+        setTimeout(function(){ document.body.removeChild(ifr); }, 2000);
+      } catch(e){ /* ignore */ }
+    }
+
+    window.addEventListener('load', function(){
+      // Give the page a tiny delay so user sees the animation, then try to launch
+      setTimeout(tryLaunch, 250);
+    });
   </script>
 </head>
 <body>
+  <!-- Wikimedia SVG (inverted to white via CSS filter) -->
   <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/3/31/Epic_Games_logo.svg" alt="Epic Games Logo">
-  <div class="loading-bar">
+
+  <div class="loading-bar" aria-hidden="true">
     <div class="loading-fill"></div>
   </div>
-  <a href="com.epicgames.launcher://">Click here if it doesn’t launch automatically</a>
-  <a href="https://store.epicgames.com/en-US/download">Download Epic Games Launcher</a>
+
+  <div class="links" role="contentinfo" aria-label="Launcher links">
+    <a href="com.epicgames.launcher://" id="open-link">Click here if it doesn’t launch automatically</a>
+    <a href="https://store.epicgames.com/en-US/download" target="_blank" rel="noopener noreferrer">Download Epic Games Launcher</a>
+  </div>
 </body>
 </html>
