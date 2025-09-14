@@ -11,18 +11,19 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background-color: #f0f0f0; /* light background */
-      color: #333; /* dark text */
+      background-color: #121212; /* dark background */
+      color: #fff; /* white text */
       font-family: Arial, sans-serif;
     }
     .logo {
       width: 120px;
       margin-bottom: 30px;
+      filter: invert(1); /* make the black SVG appear white */
     }
     .loading-bar {
       width: 200px;
       height: 6px;
-      background: #ccc; /* lighter gray bar background */
+      background: #333; /* dark gray bar background */
       border-radius: 3px;
       overflow: hidden;
       position: relative;
@@ -30,7 +31,7 @@
     .loading-fill {
       height: 100%;
       width: 0%;
-      background: #333; /* dark fill */
+      background: #fff; /* white loading animation */
       border-radius: 3px;
       animation: load 2s infinite;
     }
@@ -41,7 +42,7 @@
     }
     a {
       margin-top: 20px;
-      color: #333;
+      color: #aaa;
       text-decoration: none;
       font-size: 14px;
     }
