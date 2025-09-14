@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Epic Games Launcher</title>
+  <title>Launching...</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="epic-favicon.png">
   <style>
     body {
       margin: 0;
@@ -18,7 +20,7 @@
     .logo {
       width: 120px;
       margin-bottom: 30px;
-      filter: invert(1); /* make the black SVG appear white */
+      filter: invert(1); /* invert SVG to white */
     }
     .loading-bar {
       width: 200px;
@@ -43,12 +45,13 @@
     a {
       margin-top: 15px;
       color: #aaa;
-      text-decoration: none; /* remove underline */
+      text-decoration: none; /* no underline */
       font-size: 14px;
       display: block;
+      text-align: center;
     }
     a:hover {
-      color: #fff; /* highlight on hover */
+      color: #fff; /* brighten on hover */
     }
   </style>
   <script>
