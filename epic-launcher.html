@@ -1,15 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Launching Epic Games...</title>
+  <meta charset="UTF-8">
+  <title>Epic Games Launcher</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #121212;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    .logo {
+      width: 100px;
+      margin-bottom: 30px;
+    }
+    .loading-bar {
+      width: 200px;
+      height: 6px;
+      background: #333;
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+    .loading-fill {
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      border-radius: 3px;
+      animation: load 2s infinite;
+    }
+    @keyframes load {
+      0% { width: 0%; left: 0; }
+      50% { width: 100%; left: 0; }
+      100% { width: 0%; left: 100%; }
+    }
+    a {
+      margin-top: 20px;
+      color: #00aaff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
   <script>
     window.onload = function() {
-      // Try to redirect to Epic Games Launcher
+      // Try to launch Epic Games Launcher
       window.location.href = "com.epicgames.launcher://";
     };
   </script>
 </head>
 <body>
-  <p>If nothing happens, click <a href="com.epicgames.launcher://">here</a> to open Epic Games Launcher.</p>
+  <img class="logo" src="https://cdn2.unrealengine.com/epic-games-white-89f4c442c6ae.png" alt="Epic Games Logo">
+  <div class="loading-bar">
+    <div class="loading-fill"></div>
+  </div>
+  <a href="com.epicgames.launcher://">Click here if it doesn’t launch automatically</a>
 </body>
 </html>
