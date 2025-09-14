@@ -17,13 +17,8 @@
     }
     .logo {
       width: 120px;
-      margin-bottom: 10px;
-      filter: invert(1); /* make the black SVG appear white */
-    }
-    .title {
-      font-size: 20px;
-      font-weight: bold;
       margin-bottom: 30px;
+      filter: invert(1); /* make the black SVG appear white */
     }
     .loading-bar {
       width: 200px;
@@ -46,14 +41,14 @@
       100% { width: 0%; left: 100%; }
     }
     a {
-      margin-top: 20px;
+      margin-top: 15px;
       color: #aaa;
-      text-decoration: none; /* no underline */
+      text-decoration: none; /* remove underline */
       font-size: 14px;
+      display: block;
     }
     a:hover {
-      text-decoration: none; /* keep no underline even on hover */
-      color: #fff; /* brighten text when hovered */
+      color: #fff; /* highlight on hover */
     }
   </style>
   <script>
@@ -65,10 +60,10 @@
 </head>
 <body>
   <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/3/31/Epic_Games_logo.svg" alt="Epic Games Logo">
-  <div class="title">Epic Launcher</div>
   <div class="loading-bar">
     <div class="loading-fill"></div>
   </div>
   <a href="com.epicgames.launcher://">Click here if it doesn’t launch automatically</a>
+  <a href="https://store.epicgames.com/en-US/download">Download Epic Games Launcher</a>
 </body>
 </html>
