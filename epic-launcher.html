@@ -33,15 +33,28 @@
       -webkit-filter: invert(1);
     }
 
+    .placeholder {
+      height: 20px; /* ensures space consistency */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .loading-bar, .fallback {
+      position: absolute;
+      opacity: 1;
+      transition: opacity 0.6s ease;
+    }
+
     .loading-bar {
       width: 200px;
       height: 6px;
       background: #333;
       border-radius: 3px;
       overflow: hidden;
-      position: relative;
-      transition: opacity 0.6s ease;
     }
+
     .loading-fill {
       height: 100%;
       width: 0%;
@@ -49,6 +62,7 @@
       border-radius: 3px;
       animation: load 2s infinite;
     }
+
     @keyframes load {
       0% { width: 0%; left: 0; }
       50% { width: 100%; left: 0; }
@@ -56,15 +70,11 @@
     }
 
     .fallback {
-      margin-top: 10px;
       font-size: 14px;
       color: #aaa;
       opacity: 0;
-      transition: opacity 0.6s ease;
     }
-    .fallback.show {
-      opacity: 1;
-    }
+
     .fallback a {
       color: #aaa;
       text-decoration: none;
@@ -94,11 +104,10 @@
     window.addEventListener('load', function(){
       setTimeout(tryLaunch, 250);
 
-      // After 8 seconds, hide loading bar and show fallback link
+      // After 8 seconds, swap loading bar with fallback text
       setTimeout(function(){
         document.querySelector('.loading-bar').style.opacity = '0';
-        const fallback = document.querySelector('.fallback');
-        fallback.classList.add('show');
+        document.querySelector('.fallback').style.opacity = '1';
       }, 8000);
     });
   </script>
@@ -106,12 +115,13 @@
 <body>
   <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/3/31/Epic_Games_logo.svg" alt="Epic Games Logo">
 
-  <div class="loading-bar" aria-hidden="true">
-    <div class="loading-fill"></div>
-  </div>
-
-  <div class="fallback">
-    Didn't launch? <a href="com.epicgames.launcher://">Click to launch</a>
+  <div class="placeholder">
+    <div class="loading-bar">
+      <div class="loading-fill"></div>
+    </div>
+    <div class="fallback">
+      Didn't launch? <a href="com.epicgames.launcher://">Click to launch</a>
+    </div>
   </div>
 </body>
 </html>
