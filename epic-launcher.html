@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="refresh" content="0;url=com.epicgames.launcher://">
+  <title>Launching Epic Games...</title>
+  <script>
+    window.onload = function() {
+      // Try to redirect to Epic Games Launcher
+      window.location.href = "com.epicgames.launcher://";
+    };
+  </script>
 </head>
 <body>
-  <p>Redirecting to Epic Games Launcher...</p>
+  <p>If nothing happens, click <a href="com.epicgames.launcher://">here</a> to open Epic Games Launcher.</p>
 </body>
 </html>
