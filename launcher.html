@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Launching...</title>
+  <title>Epic Games Launcher</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
@@ -39,7 +39,7 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      min-width: 200px; /* same as bar */
+      min-width: 200px;
     }
 
     .loading-bar {
@@ -72,7 +72,8 @@
       opacity: 0;
       transition: opacity 0.6s ease;
       position: absolute;
-      white-space: nowrap; /* keep in one line */
+      white-space: nowrap;
+      text-align: center;
     }
 
     .fallback a {
@@ -81,12 +82,6 @@
     }
     .fallback a:hover {
       color: #fff;
-    }
-
-    @media (max-width:420px){
-      .logo{ width:96px; margin-bottom:20px; }
-      .loading-bar{ width:160px; }
-      .placeholder{ min-width:160px; }
     }
   </style>
 
@@ -107,18 +102,21 @@
       const gameSlug = urlParams.get('game');
       const locale = urlParams.get('locale') || 'en-US';
 
-      // Try to open launcher
+      // Try launcher
       setTimeout(tryLaunch, 250);
 
-      // After 8 seconds, swap loading bar with fallback text
+      // Show fallback after 8s
       setTimeout(function(){
         document.querySelector('.loading-bar').style.opacity = '0';
         const fallback = document.querySelector('.fallback');
-        if (gameSlug) {
-          fallback.innerHTML = `Didn't launch? <a href="https://store.epicgames.com/${locale}/p/${gameSlug}">Click to open in store</a>`;
-        } else {
-          fallback.innerHTML = `Didn't launch? <a href="https://store.epicgames.com/${locale}/">Click to open Epic Store</a>`;
-        }
+
+        let storeLink = gameSlug 
+          ? `https://store.epicgames.com/${locale}/p/${gameSlug}`
+          : `https://store.epicgames.com/${locale}/`;
+
+        fallback.innerHTML = 
+          `Didn't launch? <a href="com.epicgames.launcher://">Click to open launcher</a><br>`;
+
         fallback.style.opacity = '1';
       }, 8000);
     });
