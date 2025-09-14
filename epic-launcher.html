@@ -34,17 +34,12 @@
     }
 
     .placeholder {
-      height: 20px; /* ensures space consistency */
+      height: 20px; /* reserve space */
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
-    }
-
-    .loading-bar, .fallback {
-      position: absolute;
-      opacity: 1;
-      transition: opacity 0.6s ease;
+      min-width: 200px; /* same as bar */
     }
 
     .loading-bar {
@@ -53,6 +48,8 @@
       background: #333;
       border-radius: 3px;
       overflow: hidden;
+      transition: opacity 0.6s ease;
+      position: absolute;
     }
 
     .loading-fill {
@@ -73,6 +70,9 @@
       font-size: 14px;
       color: #aaa;
       opacity: 0;
+      transition: opacity 0.6s ease;
+      position: absolute;
+      white-space: nowrap; /* keep in one line */
     }
 
     .fallback a {
@@ -86,6 +86,7 @@
     @media (max-width:420px){
       .logo{ width:96px; margin-bottom:20px; }
       .loading-bar{ width:160px; }
+      .placeholder{ min-width:160px; }
     }
   </style>
 
