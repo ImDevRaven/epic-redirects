@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-    html,body{
+    html,body {
       height:100%;
       margin:0;
     }
@@ -40,6 +40,7 @@
       border-radius: 3px;
       overflow: hidden;
       position: relative;
+      transition: opacity 0.6s ease;
     }
     .loading-fill {
       height: 100%;
@@ -54,33 +55,24 @@
       100% { width: 0%; left: 100%; }
     }
 
-    .links {
-      margin-top: 16px;
-      text-align:center;
-      line-height:1.6;
-    }
-
-    /* Main fallback link */
-    .links a {
-      color: #aaa;
-      text-decoration: none; /* remove underline */
+    .fallback {
+      margin-top: 10px;
       font-size: 14px;
-      display:block;
+      color: #aaa;
+      opacity: 0;
+      transition: opacity 0.6s ease;
     }
-    .links a:hover {
+    .fallback.show {
+      opacity: 1;
+    }
+    .fallback a {
+      color: #aaa;
+      text-decoration: none;
+    }
+    .fallback a:hover {
       color: #fff;
     }
 
-    /* Secondary download link */
-    .links a.download {
-      font-size: 12px;
-      color: #666; /* lighter gray */
-    }
-    .links a.download:hover {
-      color: #aaa; /* brighten slightly on hover */
-    }
-
-    /* small responsive tweak */
     @media (max-width:420px){
       .logo{ width:96px; margin-bottom:20px; }
       .loading-bar{ width:160px; }
@@ -88,7 +80,6 @@
   </style>
 
   <script>
-    // Attempt to open the launcher immediately
     function tryLaunch() {
       window.location.href = "com.epicgames.launcher://";
       try {
@@ -102,6 +93,13 @@
 
     window.addEventListener('load', function(){
       setTimeout(tryLaunch, 250);
+
+      // After 8 seconds, hide loading bar and show fallback link
+      setTimeout(function(){
+        document.querySelector('.loading-bar').style.opacity = '0';
+        const fallback = document.querySelector('.fallback');
+        fallback.classList.add('show');
+      }, 8000);
     });
   </script>
 </head>
@@ -112,9 +110,8 @@
     <div class="loading-fill"></div>
   </div>
 
-  <div class="links" role="contentinfo" aria-label="Launcher links">
-    <a href="com.epicgames.launcher://" id="open-link">Click here if it doesn’t launch automatically</a>
-    <a href="https://store.epicgames.com/en-US/download" target="_blank" rel="noopener noreferrer" class="download">Download Epic Games Launcher</a>
+  <div class="fallback">
+    Didn't launch? <a href="com.epicgames.launcher://">Click to launch</a>
   </div>
 </body>
 </html>
